@@ -1,9 +1,11 @@
 // Utility Logic
 
+/** converts numbers to a string, splits them, then maps them to an array back as numbers */
 function stringToNumberArray(numbers) {
   let output = numbers.toString().split("").map(Number);
   return output;
 }
+
 
 // Business Logic
 
@@ -23,7 +25,8 @@ function ccValidator(ccNumber) {
   for (let i = 0; i < ccArray.length; i++) {
     sumTotal = sumTotal + ccArray[i];
   }
-  
+
+  /** checks if number ends in 0. returns boolean */
   const isValidCC = sumTotal%10 === 0;
   return isValidCC;
 }
