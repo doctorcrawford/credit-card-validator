@@ -1,12 +1,19 @@
+// Utility Logic
+
+function stringToNumberArray(numbers) {
+  let output = numbers.toString().split("").map(Number);
+  return output;
+}
+
 // Business Logic
 
 function ccValidator(ccNumber) {
-  const ccArray = ccNumber.toString().split("").map(Number);
+  let ccArray = stringToNumberArray(ccNumber);
 
   for (let i = ccArray.length -1; i >=0; i -= 2) {
     ccArray[i] = ccArray[i] * 2;
     if (ccArray[i] >9) {
-      const twoDigits = ccArray[i].toString().split("").map(Number);
+      const twoDigits = stringToNumberArray(ccArray[i]);
       const sum = twoDigits[0] + twoDigits[1];
       ccArray[i] = sum;
     }
@@ -17,11 +24,6 @@ function ccValidator(ccNumber) {
     sumTotal = sumTotal + ccArray[i];
   }
   
-  const sumArray = sumTotal.toString(). split("").map(Number);
-  if (sumArray[sumArray.length - 1] === 0) {
-    return 'This credit card is valid!';
-  } else {
-    return 'This credit card is not valid :(';
-  }
-
+  const isValidCC = sumTotal%10 === 0;
+  return isValidCC;
 }
